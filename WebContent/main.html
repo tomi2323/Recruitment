@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="windows-1255">
+  <title>Bootstrap Example</title>
+  
+<link rel="stylesheet" href="stryle.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="http://igniteui.com/js/modernizr.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+<script src="http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.core.js"></script>
+<script src="http://cdn-na.infragistics.com/igniteui/latest/js/infragistics.lob.js"></script>
+ <script src="//ui-grid.info/release/ui-grid-unstable.min.js"></script> 
+<link href="http://cdn-na.infragistics.com/igniteui/latest/css/themes/infragistics/infragistics.theme.css" rel="stylesheet"></link>
+<link href="http://cdn-na.infragistics.com/igniteui/latest/css/structure/infragistics.css" rel="stylesheet"></link>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+</style>
+
+
+
+
+  
+ 
+
+
+</head>
+<body ng-app="myApp" ng-controller="asicntrl2" class="w3-light-grey w3-content" style="max-width:2000px">
+<table>
+    <tr>
+	<td>
+
+<div class="sidebar">
+	<div class="w3-sidebar w3-collapse w3-white w3-animate-left sideBar" style="z-index:3;width:250px;"><br>
+	
+	
+		<div class="w3-container sideBar">
+		<a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <img src="imag/logo.png" style="width:60%;" class="w3-round"><br><br>
+    <h4><b>AT&T Recruiting Tool</b></h4>
+    <p class="w3-text-grey">Welcome: {{ currentUserId }}</p>
+  </div>
+		
+		
+	  <div class="w3-bar-block sideBar 3">
+	  
+	  <div  style="float: left;margin-bottom: 400px">
+				<a style="float: left" ng-model="searchText">Search:</a><br>
+				    <input style="float: left;" type="text" ng-model="search" placeholder="Search.." ><br><br>
+				    
+				    <a style="float: left;">Skill Set:</a><br>
+				    
+				     <div ng-repeat="x in skills"><br>
+						<form style="float: left;">
+							<span><input style="float: left;" ng-checked="customer.checked" ng-model="customer.checked" type="checkbox" >{{x.technology}}</span>
+						</form> 
+					</div><br><br>
+					<button id="save_value" ng-click="getskill()">Search</button>
+				</div>
+				
+	 </div>
+    </div>
+  
+ 
+</div>	
+		
+		<div  class="w3-main"  style="margin-left:300px">
+
+  <header>
+  
+  
+  
+  
+    <div class="w3-container title">
+    
+    
+    
+    <a href="#!2"  class="w3-bar-item w3-button w3-padding w3-text-teal "><i class="fa fa-th-large fa-fw w3-margin-right"></i>Jobs</a> 
+    <a href="#!1"  class="w3-bar-item w3-button w3-padding w3-padding w3-text-teal"><i class="fa fa-user fa-fw w3-margin-right"></i>Applicants</a>
+     <a href="#!6"  class="ManagerPage w3-bar-item w3-button w3-padding w3-text-teal "><i class="fa fa-th-large fa-fw w3-margin-right"></i>ManagerHrPage</a>  
+    <button style="float: right" ng-click="LoginOut()" class="btn btn-info btn-lg " >Log Out</button>
+    			
+    
+  
+    </div>
+   
+  </header>
+  
+ </div>
+ 
+			
+		
+				
+			
+			
+			<div style="margin-left:275px" class="content">
+				<div ng-view></div>
+			</div>
+		
+		
+		
+	
+	</td>
+	</tr>
+</table>
+</body>
+
+   <script type="text/javascript">
+  
+	var app = angular.module("myApp",[ "ngRoute",'ui.grid']);
+	
+	app.controller("asicntrl2", function($scope, $http,$attrs, $element, $compile, $location,$interval) {
+		localStorage.removeItem('aplicant');
+		
+		
+		
+		
+		$scope.LoginOut = function() {
+			localStorage.removeItem('teamleader');
+			localStorage.removeItem('manager');
+			alert("logout");
+			console.log("logout");
+			$location.path("/");
+			
+		};
+		
+		
+			$http.get('/recruitment/rest/applicants/getall').then(function(response) {	
+	 	    	  $scope.result  = response.data;
+			 });  
+		
+		
+		 $http.get('/recruitment/rest/applicants/getall').then(function(response) {	
+ 	    	  $scope.result  = response.data;
+ 	   
+		 });  	  
+ 		      
+ 	     
+		 
+		 $http.get('/recruitment/rest/skills/getall').then(function(response) {	
+	    	  $scope.skills  = response.data;
+	    	  
+	      
+	      
+		
+            $http.get('/recruitment/rest/jobs/getall').then(function(response) {	
+  	    	  $scope.jobs  = response.data;
+  	    	console.log($scope.jobs)
+  	      });
+            
+        
+        
+		
+	   
+		
+		$scope.redirect = function(index) {
+			
+			$location.path("/0")
+			$http.get('/recruitment/rest/applicants/getall').then(function(response) {	
+ 	    	  $scope.result  = response.data;
+ 	   
+		 });  	  
+			localStorage.setItem("aplicant",$scope.result[index].id );	
+			
+		}
+		
+		
+		
+	 });
+	
+	});
+	app.filter('startFrom', function() {
+	    return function(input, start) {
+	        start = +start; //parse to int
+	        return input.slice(start);
+	    }
+	});
+	app.config(function($routeProvider) {
+
+		$routeProvider.when("/", {
+			templateUrl : "loginPage.html",
+			controller : "loginctrl"
+		}).when("/1", {
+			templateUrl : "applicant.html",
+			controller : "applicantctrl"
+		}).when("/2", {		
+	    	templateUrl : "jobs2.html",
+	    	controller : "jobcontrl"
+		}).when("/0", {		
+	    	templateUrl : "applicantpage.html",
+	    	controller : "applicantpage"
+		}).when("/5", {		
+	    	templateUrl : "page3.html",
+	    	controller : "page3"			
+		}).when("/6", {		
+	    	templateUrl : "HrManagerPage.html",
+	    	controller : "HrManagerPageCtrl"			
+		})
+		
+		
+	});
+	app.controller("applicantpage", function($scope, $http, $location) {
+		console.log(localStorage.getItem("aplicant"));
+		$(".hide2").hide();
+		$(".textdive").hide();
+		$(".asi5").hide();
+		   $(function () {
+
+		 		$scope.asi1 = function () {
+			if($(".asi5").is(":visible")==false){
+				$(".asi5").show();	
+			}else{
+				$(".asi5").hide();	
+			}
+			
+		}
+          $scope.textdiv = function() {        
+        	
+        	
+        	if($(".textdive").is(":visible")==false){
+				$(".textdive").show();	
+			}else{
+				$(".textdive").hide();	
+			}
+        }
+		$http.get('/recruitment/rest/applicants/getall').then(function(response) {	
+ 	    	  $scope.result  = response.data; 
+	    	}); 
+		$http.get('/recruitment/rest/applicants/get?id='+localStorage.getItem("aplicant")).then(function(response) {	
+  	    	  $scope.applicant  = response.data;
+  	    	console.log($scope.applicant.archive);
+		if($scope.applicant.archive=="true"){
+			console.log($scope.applicant.archive);
+    		$(".myclass").hide();	
+    	  }else{
+    		  $(".myclass").show();  
+    	  }
+				
+		if($scope.applicant.summery != "null"){	
+			$(".myclass").hide();
+			$(".hide2").show();
+			
+			$scope.summery = $scope.applicant.summery
+		}
+		
+		$(function () {
+
+	          $("#recrut").igCombo({
+	              width: 300,
+	              dataSource: "http://localhost/recruitment/rest/recrutservice/getall",
+	              textKey: "firstname",
+	              valueKey: "id",
+	              multiSelection: {
+	                  enabled: true,
+	                  showCheckboxes: true
+	              },
+	              dropDownOrientation: "bottom"
+	          });
+
+	      });
+			 
+			 $scope.publish = function(){
+				 
+				 var id =  $("#recrut").igCombo("value");
+				 
+				 if(id!=[]){
+					 
+					for (var i = 0; i < id.length; i++) {
+				
+						$http.get("http://localhost/recruitment/rest/userservice/sendLink?id="
+								 +id[i])
+						 .then(function(response) {
+						 $scope.Recrut = response.data;
+						 console.log($scope.Recrut);		 
+						
+					}); 
+				 }	 
+				 }
+		            
+			 }
+			          $scope.fail = function(){
+				  
+			        	  
+			  }
+				      $scope.pass = function(){
+					  
+				  }
+					  $scope.na = function(){
+				 
+			  }
+	       $scope.associate = function(){
+				
+				 $http.get("http://localhost/recruitment/rest/applicantsJobs/createApplicantsJobs?jobsid="
+							+$scope.jobid+"&applicantsid="+localStorage.getItem("aplicant")
+							).then(function(response) {
+				var applicantjob = response.data;
+				
+				console.log(applicantjob);
+				 
+				 
+			 });
+			 }
+		
+		});
+		$scope.lockapplicant = function(index){			
+			 for (var i = 0; i < $scope.currentPage; i++) {
+				 index =  index+6;
+			}
+        	$scope.fal = "true" ;         	
+        	$http.get('/recruitment/rest/applicants/get?id='+localStorage.getItem("aplicant")).then(function(response) {	
+   	    	  $scope.applicant  = response.data;
+   	    	console.log( $scope.applicant.archive);   	    	
+        	if($scope.applicant.archive=="true"){
+        		$scope.fal = "false" ;        		
+        	}       	
+        	
+        	console.log($scope.fal);        	 
+        	  $http.get('/recruitment/rest/applicants/updateapplicant?firstname='+
+        			  $scope.applicant.firstname+"&lastname="+$scope.applicant.lastname+"&email="+
+        			  $scope.applicant.email+"&phone="+ $scope.applicant.phone+"&yearsofexperience="+$scope.applicant.yearofexperience+"&archive="+
+        			  $scope.fal+"&id="+ $scope.applicant.id+"&cv="+$scope.applicant.cv+"&locked="+$scope.applicant.locked).then(function(response) {	
+      	    	  $scope.locke  = response.data;
+      	    	  console.log( $scope.locke);
+      	    	  
+      	    	$http.get('/recruitment/rest/applicants/getall').then(function(response) {	
+       	    	  $scope.result  = response.data;
+       	    	$http.get('/recruitment/rest/applicants/get?id='+localStorage.getItem("aplicant")).then(function(response) {	
+  	  	    	  $scope.applicant  = response.data;
+  	  	    	 console.log($scope.applicant);
+  	  	    	 $scope.id =  $scope.applicant.id ;
+  	  	    	 console.log($scope.id);
+  	  	    	 $scope.firstname1 =  $scope.applicant.firstname ;
+  	  	    	
+  	  	    	 console.log($scope.arcahive);
+  	  	    	 $scope.lastname3 =   $scope.applicant.lastname ;
+  	  	    	 $scope.yearofexperience = $scope.applicant.yearofexperience;
+  	  	    	 $scope.cv ="applicantcv/"+$scope.applicant.cv;
+  	  	    	 
+  	  	    	 console.log($scope.cv);
+  	  	    	 console.log($scope.applicant.yearofexperience+""+ $scope.yearofexperience);
+  	  	    	 $scope.email = $scope.applicant.email
+  	  	    	 $scope.phone = $scope.applicant.phone
+  	  	    	 console.log($scope.firstname1);
+  	  	    	 console.log($scope.yearsofexperience);  
+  	  	    	
+        	    		 
+        	    	  
+       	    	});
+      	    	});
+      	    	
+      	    	
+      	    	
+      	      });  	
+        	});
+        }
+		
+		$scope.addsummery = function(){			
+			 for (var i = 0; i < $scope.currentPage; i++) {
+				 index =  index+6;
+			}
+       	$scope.fal = "true" ;         	
+       	$http.get('/recruitment/rest/applicants/get?id='+localStorage.getItem("aplicant")).then(function(response) {	
+  	    	  $scope.applicant  = response.data;
+  	    	console.log( $scope.applicant.archive);   	    	
+       	if($scope.applicant.archive=="true"){
+       		$scope.fal = "false" ;        		
+       	}       	
+       	
+             	 
+       	  $http.get('/recruitment/rest/applicants/updateapplicant?firstname='+
+       			  $scope.applicant.firstname+"&lastname="+$scope.applicant.lastname+"&email="+
+       			  $scope.applicant.email+"&phone="+ $scope.applicant.phone+"&yearsofexperience="+$scope.applicant.yearofexperience+"&archive="+
+       			  $scope.applicant.archive+"&id="+ $scope.applicant.id+"&cv="+$scope.applicant.cv+"&locked="+$scope.applicant.locked+"&status="+$scope.applicant.status+"&NA="+$scope.summery).then(function(response) {	
+     	    	  $scope.locke  = response.data;
+     	    	  console.log( $scope.locke);
+     	    	  
+     	    	$http.get('/recruitment/rest/applicants/getall').then(function(response) {	
+      	    	  $scope.result  = response.data;
+      	    	$http.get('/recruitment/rest/applicants/get?id='+localStorage.getItem("aplicant")).then(function(response) {	
+ 	  	    	 $scope.applicant  = response.data;
+ 	  	    	 console.log($scope.applicant);
+ 	  	    	 $scope.id =  $scope.applicant.id ;
+ 	  	    	 console.log($scope.id);
+ 	  	    	 $scope.firstname1 =  $scope.applicant.firstname ;
+ 	  	    	
+ 	  	    	 console.log($scope.arcahive);
+ 	  	    	 $scope.lastname3 =   $scope.applicant.lastname ;
+ 	  	    	 $scope.yearofexperience = $scope.applicant.yearofexperience;
+ 	  	    	 $scope.cv ="applicantcv/"+$scope.applicant.cv;
+ 	  	    	 
+ 	  	    	 console.log($scope.cv);
+ 	  	    	 console.log($scope.applicant.yearofexperience+""+ $scope.yearofexperience);
+ 	  	    	 $scope.email = $scope.applicant.email
+ 	  	    	 $scope.phone = $scope.applicant.phone
+ 	  	    	 console.log($scope.firstname1);
+ 	  	    	 console.log($scope.yearsofexperience);  
+ 	  	    	
+       	    		 
+       	    	  
+      	    	});
+     	    	});
+     	    	
+     	    	
+     	    	
+     	      });  	
+       	});
+       }
+		
+		
+		
+		   $http.get('/recruitment/rest/applicants/get?id='+localStorage.getItem("aplicant")).then(function(response) {	
+	  	    	  $scope.applicant  = response.data;
+	  	    	 console.log($scope.applicant);
+	  	    	 $scope.id =  $scope.applicant.id ;
+	  	    	 console.log($scope.id);
+	  	    	 $scope.firstname1 =  $scope.applicant.firstname ;
+	  	    	 $scope.lastname3 =   $scope.applicant.lastname ;
+	  	    	 $scope.yearofexperience = $scope.applicant.yearofexperience;
+	  	    	 $scope.cv ="applicantcv/"+$scope.applicant.cv;
+	  	    	 $scope.arcahive =  $scope.applicant.archive ;
+	  	    	 console.log($scope.cv);
+	  	    	 console.log($scope.applicant.yearofexperience+""+ $scope.yearofexperience);
+	  	    	 $scope.email = $scope.applicant.email
+	  	    	 $scope.phone = $scope.applicant.phone
+	  	    	 console.log($scope.firstname1);
+	  	    	 console.log($scope.yearsofexperience);  
+	  	    	if($scope.applicant.archive=="true"){
+      	    		
+      	    		$(".myclass").hide();	
+  	    	  }else{
+  	    		$(".myclass").show(); 
+  	    	  }
+      	    	  
+	  	    	 
+	  	      
+		   $http.get('/recruitment/rest/applicantsskillsservice/getskillsbyapp?applicant='+$scope.applicant.id).then(function(response) {	  
+			   $scope.skills  = response.data;
+			   console.log($scope.skills);
+		   });
+		   
+		   }); 
+		$scope.redirect2 = function() {
+			
+			localStorage.removeItem('aplicant');
+			$location.path("/1")	
+			
+		}
+		
+	});
+	});
+	app.controller("jobcontrl", function($scope, $http, $location) {
+		   $(".show1").hide();
+		   $scope.index = -1;
+		   $scope.id = null
+		   $scope.description = null
+		   $scope.yearsofexperience2 = null
+		   $scope.yearsofexperience = null
+		   console.log($scope.yearsofexperience2);
+		   $scope.position=  null
+		   $scope.hide = "false"
+	     $http.get('/recruitment/rest/jobs/getall').then(function(response) {	
+ 	    	  $scope.jobs  = response.data;
+ 	    	console.log($scope.jobs)
+ 	     
+	     $scope.currentPage = 0;
+		    $scope.pageSize = 6;
+		   
+		    $scope.numberOfPages=function(){
+		    	$http.get('/recruitment/rest/jobs/getall').then(function(response) {	
+			    	  $scope.jobs  = response.data;
+		        return Math.ceil($scope.jobs.length/$scope.pageSize); 
+		    	});
+		    }
+		
+		 $http.get('/recruitment/rest/skills/getall').then(function(response) {	
+	    	  $scope.skills  = response.data;
+		 });
+		
+		$(function () {
+
+            $("#checkboxSelectCombo").igCombo({
+                width: 300,
+                dataSource: 'http://localhost/recruitment/rest/skills/getall',
+                textKey: "technology",
+                valueKey: "id",
+                multiSelection: {
+                    enabled: true,
+                    showCheckboxes: true
+                },
+                dropDownOrientation: "bottom"
+            });
+
+        });
+		$(function () {
+	      $("#recruting").igCombo({
+              width: 300,
+              dataSource: 'http://localhost/recruitment/rest/recrutservice/getall',
+              textKey: "lastname",
+              valueKey: "id",
+              multiSelection: {
+                  enabled: true,
+                  showCheckboxes: true
+              },
+              dropDownOrientation: "bottom"
+          });
+
+      });
+		
+		console.log($(".textdive").is(":visible"))
+		$(".textdive").hide();
+		$scope.textdiv = function() {        
+        	
+        	
+        	if($(".textdive").is(":visible")==false){
+				$(".textdive").show();	
+			}else{
+				$(".textdive").hide();	
+			}
+        }
+		$scope.redirect = function(index) {
+			 for (var i = 0; i < $scope.currentPage; i++) {
+				 index =  index+6;
+			}
+			$location.path("/5")
+			
+			  $http.get('/recruitment/rest/jobs/getall').then(function(response) {	
+	  	    	  $scope.jobs  = response.data;
+	  	    	console.log($scope.jobs)
+	  	      });
+			localStorage.setItem("jobs",$scope.jobs[index].id );	
+			
+		}
+		
+		 $scope.editrow = function (index) {
+			 $scope.index = index;
+			 for (var i = 0; i < $scope.currentPage; i++) {
+				 index =  index+6;
+			}
+			  var show = "true";
+			  console.log(show)
+			   $scope.name = $scope.jobs[index]['name']
+			  $(".textdive").show();
+			  $(".show1").show();
+			   console.log( $scope.name);
+			   $scope.id = $scope.jobs[index]['id']
+			   $scope.description=$scope.jobs[index]['description']
+			   $scope.yearsofexperience2=$scope.jobs [index]['yearsofexperience']
+			   $scope.yearsofexperience=$scope.jobs [index]['yearsofexperience']
+			   console.log($scope.yearsofexperience2);
+			   $scope.position=$scope.jobs [index]['skills']
+			   
+			   $http.get('/recruitment/rest/jobsskllsservice/getskillsbyjob?job='+$scope.jobs[index]['id']).then(function(response) {	 
+				   $scope.jobskilis2  = response.data;
+				  
+			   });
+			   
+			   $http.get('/recruitment/rest/jobrecruting/getjobbymanger?job='+$scope.jobs[index]['id']).then(function(response) {	 
+				   $scope.jobskilis3  = response.data;
+				  
+			   });
+		 }
+				
+			$scope.edit = function(){
+				
+				
+			};
+		
+		 
+		 $scope.asi55 = function() {
+			 $(".textdive").hide();
+			 $(".show1").hide();
+			  var show = "false";
+			  console.log("asi");
+			   $scope.name="";
+			   $scope.description="";
+			   $scope.yearsofexperience2="";
+			   $scope.yearsofexperience="";
+			   console.log($scope.yearsofexperience2);
+			   $scope.position="";
+		 }
+		
+		 var type = localStorage.getItem("teamleader");
+		 if(type=="teamleader"){
+	    	 
+	    	  $scope.hide = "true"
+	    	  
+	    	  
+	      }
+		 
+		$scope.createjob = function(index) {
+			 if(index==-1) 
+	         {
+         	$scope.fal ="false";
+         	var name =$scope.name;
+         	var description = $scope.description
+         	var yearsofexperience = $scope.yearsofexperience         	
+         	 $scope.index = -1;  	
+        		if(confirm("do you want creat jobs")==true&&name!=undefined&&description!=undefined&&yearsofexperience!=undefined){       	
+              	console.log(name);
+         	    $http.get('/recruitment/rest/jobs/createjob?description='+
+         	    		description+"&yearsofexperience="+yearsofexperience+"&position="+
+         	    		name+"&archive="+$scope.fal+"&name="+name
+        			     ).then(function(response) {	
+      	    	     $scope.locke  = response.data;
+      	    	     console.log( $scope.locke);           			
+      	    	$http.get('/recruitment/rest/jobs/getall').then(function(response) {	
+       	    	  $scope.jobs  = response.data; 
+      	    	});   		
+      	    	var firstname2 = $("#checkboxSelectCombo").igCombo("value");
+             	console.log(firstname2);
+             	var job = $("#recruting").igCombo("value");
+             	console.log(job);
+             	if(job!=[]) {                		
+             		for (var i = 0; i < job.length; i++) {
+             			$http.get('/recruitment/rest/jobrecruting/conectjobtomanger?job='+$scope.locke.id+"&manger="+job[i]).then(function(response) {
+             						
+		          	    	  $scope.jobmanger  = response.data;
+		          	    	console.log( $scope.jobmanger);
+             			});                		
+             	} 	 
+         	
+             	}else{
+             		alert("you didnt chose any job");
+             	}
+             	if(firstname2!=[]) {
+        		for (var i = 0; i < firstname2.length; i++) {
+         			$http.get('/recruitment/rest/jobsskllsservice/conectjobtoskill?job='+$scope.locke.id+"&skill="+firstname2[i]).then(function(response) {
+         						
+	          	    	  $scope.appskills  = response.data;
+	          	    	console.log( $scope.appskills);
+         			}); 
+        		}
+         	}else{
+         		alert("you didnt chose any skill");
+         	} 		 
+     	
+         	
+			
+        			     });		 
+         }else {
+				alert("you_must_fill_all_rows");
+         }
+        		
+         }else
+         {
+        	 $http.get('/recruitment/rest/jobsskllsservice/getskillsbyjob?job='+$scope.id).then(function(response) {	  
+    			   $scope.skills  = response.data;
+    			   console.log($scope.skills);
+    		 
+        	 for (var i = 0; i <  $scope.skills.length; i++) {
+        	 $http.get('/recruitment/rest/jobsskllsservice/deletejobskill?id='+$scope.skills[i].id).then(function(response) {	 
+				   $scope.jobskilis6  = response.data;
+				   
+        	   });   
+        	 } 
+        	 $http.get('/recruitment/rest/jobsskllsservice/getskillsbyjob?job='+$scope.id).then(function(response) {	  
+  			   $scope.skills88  = response.data;
+  			   console.log($scope.skills88);
+        	 
+        	   });
+			   
+        	
+        	  });
+        	 $http.get('/recruitment/rest/jobrecruting/getjobbymanger?job='+$scope.id).then(function(response) {	  
+  			   $scope.mangers  = response.data;
+  			   console.log($scope.mangers);
+  			 for (var i = 0; i <  $scope.mangers.length; i++) {
+  	        	 $http.get('/recruitment/rest/jobrecruting/deletejobsmanager?id='+$scope.mangers[i].id).then(function(response) {	 
+  					   $scope.jobskilis5  = response.data;
+  					   
+  				   });
+  	        	 }
+  		   });        	 
+        	
+			
+			$http.get("http://localhost/recruitment/rest/jobs/updateJob?id="
+			+$scope.id+"&name="
+			+$scope.name+"&description="
+			+$scope.description+"&yearsofexperience="
+			+$scope.yearsofexperience+"&position="
+			+$scope.position)
+				
+			
+	            .then(function(response) {
+	            	
+	            var response = response.data;
+	            var firstname2 = $("#checkboxSelectCombo").igCombo("value");
+             	
+             	
+             	var job = $("#recruting").igCombo("value");
+             	console.log(job);
+             	
+             	
+             	if(firstname2!=[]) {
+        		for (var i = 0; i < firstname2.length; i++) {
+         			$http.get('/recruitment/rest/jobsskllsservice/conectjobtoskill?job='+$scope.id+"&skill="+firstname2[i]).then(function(response) {
+         						
+	          	    	  $scope.appskills  = response.data;
+	          	    	
+         			}); 
+        		}
+         	}else{
+         		alert("you didnt chose any skill");
+         	} 		 
+             	if(job!=[]) {                		
+             		for (var i = 0; i < job.length; i++) {
+             			$http.get('/recruitment/rest/jobrecruting/conectjobtomanger?job='+$scope.id+"&manger="+job[i]).then(function(response) {
+             						
+		          	    	  $scope.jobmanger  = response.data;
+		          	    	console.log( $scope.jobmanger);
+             			});                		
+             	} 	 
+         	
+             	}else{
+             		alert("you didnt chose any job");
+             	}
+	            console.log(response);
+	            
+	            if(response.msg == "ok"){
+		
+				
+	             $scope.id='';
+				 $scope.name='';
+				 $scope.description='';
+				 $scope.yearsofexperience='';
+				 $scope.position='';
+				 $scope.index = -1; 
+				 firstname2=[];
+				 job=[];
+				$http.get('/recruitment/rest/jobs/getall').then(function(response) {	
+		  	    	  $scope.jobs  = response.data;
+		  	    	console.log($scope.jobs)
+		  	      });
+			
+	            }else{
+	            	alert("is not update");
+	            }
+	            }); 
+         }
+		}			    
+         	    
+         	    
+	     });  	    
+        	
+	});
+	app.controller("applicantctrl", function($scope, $http, $location) {
+		$http.get('/recruitment/rest/applicants/getall').then(function(response) {	
+	    	  $scope.result  = response.data;
+	    	  $scope.index = -1;
+		$scope.currentPage = 0;
+	    $scope.pageSize = 6;
+	    $scope.id = null;
+		$scope.firstname = null;
+		$scope.lastname = null;
+	    $scope.phone = null;
+	    $scope.email = null;
+	    $scope.yearsofexperience = null;
+	    $scope.archive = null;
+	    $scope.cv = null;
+	    $scope.locked =  null;
+	    $(".show1").hide();
+	    $scope.hide = "false"
+	    $scope.numberOfPages=function(){
+	    	$http.get('/recruitment/rest/applicants/getall').then(function(response) {	
+		    	  $scope.result  = response.data;
+	        return Math.ceil($scope.result.length/$scope.pageSize); 
+	    	});
+	    }
+	     
+	
+	 $http.get('/recruitment/rest/applicants/getall').then(function(response) {	
+   	  $scope.result  = response.data;
+  
+	 });  	  
+	      
+    
+	 
+	 $http.get('/recruitment/rest/skills/getall').then(function(response) {	
+  	  $scope.skills  = response.data;
+  	  
+	 });
+    
+	
+      $http.get('/recruitment/rest/jobs/getall').then(function(response) {	
+    	  $scope.jobs  = response.data;
+    	console.log($scope.jobs)
+      });
+     
+      var type = localStorage.getItem("teamleader");
+    
+      if(type=="teamleader"){
+    	  $http.get('/recruitment/rest/applicants/getallarchivetrue').then(function(response) {	
+    	   	  $scope.result  = response.data;
+    	   	 
+    	  
+    		 });  	    
+    	  $scope.hide = "true"
+    	  
+    	  
+      }
+      
+      
+      $(function () {
+
+          $("#skils_select").igCombo({
+              width: 300,
+              dataSource: 'http://localhost/recruitment/rest/skills/getall',
+              textKey: "technology",
+              valueKey: "id",
+              multiSelection: {
+                  enabled: true,
+                  showCheckboxes: true
+              },
+              dropDownOrientation: "bottom"
+          });
+
+      });
+     
+      $scope.asi55 = function() {
+			 $(".textdive").hide();
+			 $(".show1").hide();
+			 
+			  console.log("asi");
+			   $scope.id="";
+			   $scope.lastname="";
+			   $scope.yearsofexperience="";
+			   $scope.archive="";
+			   console.log($scope.yearsofexperience2);
+			   $scope.firstname="";
+			   $scope.phone="";
+			   $scope.email="";
+			   $scope.cv="";
+			   $scope.locked="";
+			   $scope.yearsofexperience2="";
+			   
+		 }
+      
+		 $scope.editrow = function (index) {
+			 $scope.index = index;
+			 for (var i = 0; i < $scope.currentPage; i++) {
+				 index =  index+6;
+			}	
+			 $http.get('/recruitment/rest/applicantsskillsservice/getskillsbyapp?applicant='+$scope.result[index].id).then(function(response) {	  
+  			   $scope.skills10  = response.data;
+  			   console.log($scope.skills);
+			 });
+			    $(".show1").show();
+			    $scope.yearsofexperience2= $scope.result[index]['yearofexperience']
+			    $scope.id = $scope.result[index]['id'];
+				$scope.firstname = $scope.result[index]['firstname'];
+				$scope.lastname = $scope.result[index]['lastname'];
+			    $scope.phone = $scope.result[index]['phone'];
+			    $scope.email =$scope.result[index]['email'];
+			    $scope.yearsofexperience = $scope.result[index]['yearofexperience'];
+			    $scope.archive = $scope.result[index]['archive'];;
+			    $scope.cv = $scope.result[index]['cv'];
+			    $scope.locked =  $scope.result[index]['locked'];
+				var firstname = $scope.firstname;
+	         	var lastname = $scope.lastname;
+	         	var email1 = $scope.email;
+	         	var phone1 = $scope.phone;
+	         	var yearsofexperience1 = $scope.yearsofexperience;
+			  
+		 }	
+			
+			
+      
+      
+		 $scope.createapplicant = function(index) {
+			 if(index==-1) 				
+	         {
+         	$scope.fal ="false";
+         	var firstname = $("#asi2").val()
+         	var lastname = $("#asi3").val()
+         	var email1 = $("#asi4").val()
+         	var phone1 = $("#asi5").val()
+         	var yearsofexperience1 = $("#asi6").val()     	
+        		if(confirm("do you want creat applicant")==true&&firstname!=""&&email1!=""&&phone1!=""&&lastname!=""){       	
+              	console.log(firstname);
+         	    $http.get('/recruitment/rest/applicants/createapplicant?firstname='+
+         			 lastname+"&lastname="+firstname+"&email="+
+         			 email1+"&phone="+phone1+"&yearsofexperience="+yearsofexperience1+"&archive="+
+        			     $scope.fal).then(function(response) {	
+      	    	     $scope.locke  = response.data;
+      	    	     console.log( $scope.locke);           			
+      	    	$http.get('/recruitment/rest/applicants/getall').then(function(response) {	
+       	    	  $scope.result  = response.data; 
+      	    	});   		
+      	    	var firstname2 = $("#skils_select").igCombo("value");
+             	console.log(firstname2);
+             	if(firstname2!=[]) {                		
+             		for (var i = 0; i < firstname2.length; i++) {
+             			$http.get('/recruitment/rest/applicantsskillsservice/conectapptoskill?applicant='+$scope.locke.id+"&skill="+firstname2[i]).then(function(response) {
+             						
+		          	    	  $scope.appskills  = response.data;
+		          	    	console.log( $scope.appskills);
+             			});                		
+             	} 		 
+         	
+             	}else{
+             		alert("you didnt chose any skill");
+             	}
+       
+			
+        			 });
+         }else {
+				alert("you_must_fill_all_rows");
+         }
+         }else
+         {
+
+        	 $http.get('/recruitment/rest/applicantsskillsservice/getskillsbyapp?applicant='+$scope.id).then(function(response) {	  
+    			   $scope.skills10  = response.data;
+    			   console.log($scope.skills);
+    		 
+        	 for (var i = 0; i <  $scope.skills10.length; i++) {
+        	 $http.get('/recruitment/rest/applicantsskillsservice/deletappssklls?id='+$scope.skills[i].id).then(function(response) {	 
+				   $scope.jobskilis6  = response.data;
+				   
+        	   });   
+        	 } 
+        	 }); 
+        	 var firstname2 = $("#skils_select").igCombo("value");
+          	console.log(firstname2);
+          	if(firstname2!=[]) {                		
+          		for (var i = 0; i < firstname2.length; i++) {
+          			$http.get('/recruitment/rest/applicantsskillsservice/conectapptoskill?applicant='+$scope.id+"&skill="+firstname2[i]).then(function(response) {
+          						
+		          	    	  $scope.appskills  = response.data;
+		          	    	console.log( $scope.appskills);
+          			});                		
+          	} 		 
+          	}
+        	 $http.get('/recruitment/rest/applicants/updateapplicant?firstname='+
+        			 $scope.firstname+"&lastname="+$scope.lastname+"&email="+
+        			 $scope.email+"&phone="+$scope.phone+"&yearsofexperience="+$scope.yearsofexperience+"&archive="+
+        			 $scope.archive+"&id="+ $scope.id+"&cv="+$scope.cv+"&locked="+$scope.locked).then(function(response) {	
+     	    	  $scope.locke  = response.data;
+     	    	   if( $scope.locke.lastname != null){
+     	    		   
+     	    		   
+     	    			$scope.firstname = "";
+     	    			$scope.lastname= "";
+     	    		    $scope.phone = "";
+     	    		    $scope.email = "";
+     	    		    $scope.yearsofexperience = "";
+     	    		   $scope.yearsofexperience2 = "";
+     	    		    $scope.archive = "";
+     	    		    $scope.cv = "";
+     	    		    $scope.locked = ""; 
+     	    		    $scope.index = -1; 
+     					 firstname2=[];
+     					 job=[];    		   
+     					
+     				  
+     	    	   }
+       			  }); 	
+        	 
+        	 
+		 }
+       
+         }  
+		 $scope.lockapplicant = function(index){			
+			 for (var i = 0; i < $scope.currentPage; i++) {
+				 index =  index+6;
+			}
+        	$scope.fal = "true" ; 
+        	console.log("asi");
+        	$http.get('/recruitment/rest/applicants/get?id='+$scope.result[index].id).then(function(response) {	
+   	    	  $scope.applicant  = response.data;
+   	    	console.log( $scope.applicant.archive);   	    	
+        	if($scope.applicant.archive=="true"){
+        		$scope.fal = "false" ;        		
+        	}       	
+        	
+        	console.log($scope.fal);        	 
+        	  $http.get('/recruitment/rest/applicants/updateapplicant?firstname='+
+        			  $scope.applicant.firstname+"&lastname="+$scope.applicant.lastname+"&email="+
+        			  $scope.applicant.email+"&phone="+ $scope.applicant.phone+"&yearsofexperience="+$scope.applicant.yearofexperience+"&archive="+
+        			  $scope.fal+"&id="+$scope.applicant.id+"&cv="+$scope.applicant.cv+"&locked="+$scope.applicant.locked).then(function(response) {	
+      	    	  $scope.locke  = response.data;
+      	    	  console.log( $scope.locke);
+      	    	  
+      	    	$http.get('/recruitment/rest/applicants/getall').then(function(response) {	
+       	    	  $scope.result  = response.data;
+       	    	$http.get('/recruitment/rest/applicants/get?id='+$scope.result[index].id).then(function(response) {	
+  	  	    	  $scope.applicant  = response.data;
+  	  	    	 console.log($scope.applicant);
+  	  	    	 $scope.id =  $scope.applicant.id ;
+  	  	    	 console.log($scope.id);
+  	  	    	 $scope.firstname1 =  $scope.applicant.firstname ;
+  	  	    	
+  	  	    	 console.log($scope.arcahive);
+  	  	    	 $scope.lastname3 =   $scope.applicant.lastname ;
+  	  	    	 $scope.yearofexperience = $scope.applicant.yearofexperience;
+  	  	    	 $scope.cv ="applicantcv/"+$scope.applicant.cv;
+  	  	    	 
+  	  	    	 console.log($scope.cv);
+  	  	    	 console.log($scope.applicant.yearofexperience+""+ $scope.yearofexperience);
+  	  	    	 $scope.email = $scope.applicant.email
+  	  	    	 $scope.phone = $scope.applicant.phone
+  	  	    	 console.log($scope.firstname1);
+  	  	    	 console.log($scope.yearsofexperience);  
+  	  	    	
+        	    		 
+        	    	  
+       	    	});
+      	    	});
+      	    	
+      	    	
+      	    	
+      	      });  	
+        	});
+        	
+        	 $http.get('/recruitment/rest/applicants/getall').then(function(response) {	
+        	   	  $scope.result  = response.data;
+        	  
+        		 });  	  
+        }
+		
+		 $scope.redirect = function(index) {
+			 for (var i = 0; i < $scope.currentPage; i++) {
+				 index =  index+6;
+			}
+				$location.path("/0")
+				$http.get('/recruitment/rest/applicants/getall').then(function(response) {	
+	 	    	  $scope.result  = response.data;
+	 	   
+			 });  	  
+				localStorage.setItem("aplicant",$scope.result[index].id );	
+				
+			}
+		 
+		 $scope.cheack = function() {
+			
+         	var firstname2 =  $("#skils_select").igCombo("value");
+         	console.log(firstname2); 	
+         }	
+		 });
+	});
+	
+	
+	app.controller("page3", function($scope, $http, $location) {
+		console.log(localStorage.getItem("jobs"));	
+		$http.get('/recruitment/rest/jobs/get?id='+localStorage.getItem("jobs")).then(function(response) {	
+  	    	  $scope.job  = response.data;  	    	
+  	    	 $scope.req = $scope.job.description
+  	    	 $scope.position = $scope.job.skills
+  	    	 $scope.yearsofexperience = $scope.job.yearsofexperience
+		 
+		 $http.get('/recruitment/rest/jobrecruting/getjobbymanger?job='+$scope.job.id).then(function(response) {	  
+			   $scope.mangers  = response.data;
+			   console.log($scope.mangers);
+		   });
+  	    	 
+  	    	 $http.get('/recruitment/rest/jobsskllsservice/getskillsbyjob?job='+$scope.job.id).then(function(response) {	  
+  			   $scope.skills  = response.data;
+  			   console.log($scope.skills);
+  		   });
+		
+		$scope.redirect2 = function() {
+			
+			localStorage.removeItem('jobs');
+			$location.path("/2")	
+			
+		}
+		
+		});
+		
+	});  
+	
+	app.controller("HrManagerPageCtrl", function($scope, $http, $location) {
+		 $http.get('http://localhost/recruitment/rest/applicants/getApllicantByArchive').then(function(response) {	  
+			   $scope.getApllicantByArchive  = response.data;
+			   console.log($scope.getApllicantByArchive);
+		   });
+		
+	});  
+	
+	
+	app.controller("loginctrl", function($scope, $http, $location,$rootScope) {
+		$rootScope.currentUserId = '';
+
+		$(".sidebar").hide();
+		$(".options").hide();
+		$(".logOut").hide();
+		$(".title").hide();
+		
+		$scope.login = function() {
+			
+			$http.get("http://localhost/recruitment/rest/userservice/getUserByUsernameAndPass?username="
+							+ $scope.username+"&password="
+							+ $scope.password).then(function(response) {
+				var login = response.data;
+				$rootScope.currentUserId = login.username;
+				console.log(response.data);
+
+				if (login != null) {
+					if (login.role =="teamleader") {
+						alert("login");
+						$(".sidebar").show();
+						$(".options").show();
+						$(".logOut").show();
+						$(".title").show();
+						$(".ManagerPage").hide();
+						$location.path("/2");
+						localStorage.setItem("teamleader",login.role );	 
+					}
+					if (login.role == "hrmanager") {
+						alert("login");
+						$(".sidebar").show();
+						$(".options").show();
+						$(".logOut").show();
+						$(".title").show();
+						$(".ManagerPage").show();
+					
+						localStorage.setItem("teamleader",login.role );	 
+						$location.path("/6");
+						
+					}
+					if(login ==""){
+						alert("The user name or password is incorrect");
+					}
+					
+					}
+				
+				});	
+							
+		};
+		
+	
+	});
+	</script>
+	</html >

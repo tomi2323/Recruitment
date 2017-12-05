@@ -1,0 +1,167 @@
+<div>
+
+<br><br>
+<button ng-hide="{{hide}}"  ng-click="asi55()" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default btn-sm">               
+					<span  class="glyphicon glyphicon-plus"></span> Add
+				</button>
+			
+			<br><br>
+		
+<div  class="wrapper">
+<div class="box " ng-repeat="x in result |filter: search | startFrom:currentPage*pageSize | limitTo:pageSize" >     
+                    <button ng-hide="{{hide}}" ng-click="lockapplicant($index)" id= "show2" type="button" class="btn btn-default btn-sm show5 "> <span class="glyphicon glyphicon-remove"></span></button>
+					<button ng-hide="{{hide}}" id= "show2" ng-click="editrow($index)" data-toggle="modal" data-target="#myModal" type="button" data-toggle="popover" data-trigger="hover" data-content="Some content"  class="btn btn-default btn-sm show5"> <span class="glyphicon glyphicon-pencil"></span></button>
+				    <button type="button" ng-show="{{x.archive}}" title="Header{{x.firstname}}    {{x.lastname}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-lock"></span></button>
+   <div >Applicant</div>
+  <div ><a class="panel-heading" style="width:100%">{{x.firstname}}    {{x.lastname}}</a></div>
+  <br><br>
+  <div ></div>
+  <button style="float: right: ;"  class="btn btn-info vis" ng-click=" redirect($index)">Applicant-page</button>
+</div>
+	
+</div>
+<div> <br><br><button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class=" previous round">&#8249;
+      
+    </button>
+			<button ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=currentPage+1" class=" previous round">&#8250;
+    
+    </button> </div><br>
+    <div>page   -  {{currentPage+1}}</div>	
+<br><br>
+											
+<br><br><br>
+<div class="modal fade" id="myModal" role="dialog">
+       <div class="modal-dialog">
+        <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h4 class="modal-title">new Applicant personal details</h4>
+                </div>
+                  <div class="modal-body">
+     
+        <br><br>
+       <p><b>fill Applicant personal details</b></p> 
+       <br>
+                                           <form class="search2">
+
+													<label colspan="2" style="float: left ;" >Applicant-ID:</label>
+													<div >
+														<input ng-model="id" type="text" class="form-control"
+															placeholder="please Enter Applicant id"
+															 id="asi1"  ></input>
+													</div>
+													 <label style="float: left ;">Applicant-First-Name:</label>
+													<div >
+														<input ng-model="firstname"  type="text" class="form-control "
+															placeholder="please Enter Applicant Name" 
+															id="asi3" required="required"></input>
+													</div>
+													 <label style="float: left ;">Applicant-Last-Name:</label>
+													<div>
+														<input ng-model="lastname" type="text" class="form-control"
+															placeholder="please Enter Applicant Name" 
+															id="asi2" required="required"></input>
+													</div>
+													 <label style="float: left ;">Applicant-Phone:</label>
+													<div>
+														<input ng-model="phone" type="text" class="form-control"
+														placeholder="please Enter Applicant Phone" 
+														id="asi4" required="required"></input>
+													</div>
+													<label style="float: left ;">Applicant-Email:</label>
+													<div>
+														<input ng-model="email" type="text" class="form-control"placeholder="please Enter Applicant Phone"
+														 id="asi5" required="required"></input>
+													</div>
+													<br>
+													 <label style="float: left ;">Choose-Yearsofexperience:</label>
+													<div style="width: 25%;" >													
+														<input  ng-model="yearsofexperience"  min="0" max="50" type="number" class="form-control"
+															placeholder=" Yearsofexperience" 
+															id="asi6" required="required"></input>
+													</div>
+															<br>
+															<div class="show1" style="width: 25%;" >
+															<label style="float: left ;">current-Yearsofexperience:</label>													
+														<input   ng-disabled="true"   type="text" ng-model="yearsofexperience2" value="asi" type="text"  class="form-control" 
+															  ></input>
+													</div>
+													
+													
+												
+													
+													
+													
+						      <div>
+			
+		<table>
+	<tr >
+	<td>
+	<h4 >Conect applicant to Skill</h4>
+	</td>
+	
+	</tr>
+	<tr>
+	<td><div>
+       <p>Choose Skill</p>     
+		
+		<input  name='ddSelectedItemText' id='skils_select' />
+		<br><br>
+		 <button ng-click="createapplicant(index)" >create applicant</button>
+		 <br><br>
+	
+		</div>
+	</td><td style="padding-left: 7%;"  class="show1">
+							      <table ><tr><td></td>current skills</tr><tr  ng-repeat="x in skills10"><td>
+							      <input ng-disabled="true" value="{{x.skillsid.technology}}"  type="text"></td></tr></table></td>
+	
+		
+		</tr>
+		<tr>
+		<td > <div style="padding-left: 72%;">
+								</div>
+							</td></tr>
+		
+          </table>
+            </div>
+								
+								</form>
+													
+												     
+       
+   			     
+	
+	
+								
+		<div style="padding-left: 90%;"> <button style="float: right: ;"  type="button"  class="btn btn-info" data-dismiss="modal">Close</button></div>
+		</div>	
+				</div>
+													
+													</div>
+													</div>
+						</div>						
+	<div class="modal fade" id="myModal2" role="dialog">
+       <div class="modal-dialog">
+        <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h4 class="modal-title">interview summary</h4>
+                </div>
+                  <div class="modal-body">    
+        
+       <p><b>Add interview summary</b></p> 
+       <br>
+       
+                                           <form>												
+													<div>
+														<textarea name="textarea" style="width:500px;height:300px;"></textarea>
+													</div>
+				</form>								
+		<div style="padding-left: 90%;"> <button style="float: right: ;"  type="button"  class="btn btn-info" data-dismiss="modal">Close</button></div>
+		</div>	
+				</div>
+													
+													</div>
+													</div>

@@ -1,0 +1,68 @@
+body{
+width: 100%;
+}
+
+	
+	
+	
+.box {
+background-color: #444;
+border:7ex;
+color: #fff;
+border-radius: 2px;
+padding: 20px;
+font-size: 150%;
+margin-top: 5px;
+}
+.wrapper {
+display: grid;
+grid-gap: 80px;
+grid-template-columns: 300px 300px 300px;
+color: #444;
+}
+    .search{
+	width: 30%;
+	float: non;
+	padding-top :15px;
+	padding-bottom: 20px;
+	
+}.search2{
+	width: 70%;
+	
+	
+
+}.sideBar{
+font-size:15px	
+}
+.footer{
+font-size:40px;
+text-align:center;
+}
+.selects{
+font-size:40px;
+}
+.multiselect {
+    width:20em;
+    height:15em;
+    border:solid 1px #c0c0c0;
+    overflow:auto;
+}.multiselect label {
+    display:block;
+}
+ 
+.multiselect-on {
+    color:#ffffff;
+    background-color:#000099;
+}
+.previous {
+    background-color: black;
+    color: white;
+}
+.round {
+    border-radius: 100%;
+    
+}
+.loginContentUser{
+	float: right;
+	padding-right: 200px;
+}
