@@ -1,0 +1,55 @@
+
+<html data-ng-app ="myApp">
+	<head>
+		<title> git Example project</title>
+		
+		<style type="text/css">
+			
+			#loginForm{
+				background-color:orange;
+			}
+		
+		</style>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	</head>
+	
+	<body data-ng-controller="myCtrl">
+		
+		<div id="loginForm">
+			<form>
+			
+				<a>user name:</a>
+					<input type="text" data-ng-model="username">
+				<a>password</a>
+					<input type="password" data-ng-model="password">			
+					
+				<input type="submit" data-ng-click="">			
+			
+			
+			</form>
+		</div>
+		
+		
+		<script type="text/javascript">
+			
+			var app = angular.module("myApp",[]);
+				app.controller("myCtrl", function($http,$scope){
+					
+					$scope.login = function(){
+						$http.get("http://localhost/Team-A/login/getUser?"
+								+"username="+ $scope.username
+								+"&password="+ $scope.password).then(function(response){
+								
+									var user = response.data;
+						})
+					}
+							
+				})
+		
+		</script>
+	
+	</body>
+
+</html>
+
