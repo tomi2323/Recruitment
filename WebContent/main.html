@@ -50,6 +50,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 <div class="sidebar">
 	<div class="w3-sidebar w3-collapse w3-white w3-animate-left sideBar" style="z-index:3;width:250px;"><br>
 	
+	<span id="setDate"></span>&nbsp;<span id="setDay"></span>
+	<div id="setTime"></div>
+	
 	
 		<div class="w3-container sideBar">
 		<a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
@@ -137,7 +140,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 		$scope.LoginOut = function() {
 			localStorage.removeItem('teamleader');
 			localStorage.removeItem('manager');
-			alert("logout");
 			console.log("logout");
 			$location.path("/");
 			
@@ -1116,7 +1118,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
 				if (login != null) {
 					if (login.role =="teamleader") {
-						alert("login");
 						$(".sidebar").show();
 						$(".options").show();
 						$(".logOut").show();
@@ -1126,7 +1127,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 						localStorage.setItem("teamleader",login.role );	 
 					}
 					if (login.role == "hrmanager") {
-						alert("login");
 						$(".sidebar").show();
 						$(".options").show();
 						$(".logOut").show();
@@ -1146,7 +1146,20 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 				});	
 							
 		};
-		
+		var myVar = setInterval(myTimer, 1000);
+		var myVar2 = setInterval(myDate);
+
+		function myTimer() {
+		    var d = new Date();
+		    document.getElementById("setTime").innerHTML = d.toLocaleTimeString();
+		}
+		function myDate() {
+		    var date = new Date();
+		    document.getElementById("setDate").innerHTML = date.toLocaleDateString();
+		}
+		var dayOfWeek = new Date();
+		var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+		document.getElementById("setDay").innerHTML = days[dayOfWeek.getDay()];
 	
 	});
 	</script>

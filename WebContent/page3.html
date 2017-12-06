@@ -4,102 +4,101 @@
 <meta charset="windows-1255">
 <title>Insert title here</title>
 </head>
-<body  >
-<div style="width: 80%;"  >
-<div      class="modal-header">
+<body>
+	<div style="width: 80%;"  >
+		<div class="modal-header">
           
-          <h4 class="modal-title"> <p style="font-weight: bold;"><h4><b> {{position}}</b></h4>                 </p>
-        </div>
-        <div style="font-weight: bold;" class="card">
-        
-        <br>
-        <div  class="container">
-      
-        
-        <table class=" table-hover" >
-        <tr>
-        <td>        
-        <h4 style="color: blue;">Job requirments:</h4>      
-        <table style="width: 78%;" class="table table-hover" >
-        <tr  >
-        <td >{{req}}</td>
-        </tr>
-        </table>
-        <div class="card">
-        <br><br>
-        <h4 style="color: blue;">Job required skills:</h4>
-  
-        <table class=" table-hover" style="width: 50%;"  >
-        <tr ng-repeat="x in skills" >
-        <td>{{x.skills.technology}}</td>
-        </tr>
-        </table>
-        
-     
-       </div>
-       <br><br>
-        <div class="card">
-        <br><br>
-        <h4 style="color: blue;">attache managers:</h4>
-  
-        <table class=" table-hover" style="width: 50%;"  >
-        <tr ng-repeat="x in mangers" >
-        <td>{{x.manager.firstname}}</td>
-        </tr>
-        </table>
-        
-     
-       </div>
-       <br><br>
-       <div>
-       <h4 style="color: blue;">Job required yearsofexperience:</h4>
-       <table class=" table-hover" style="width: 50%;"  >
-        <tr>
-        <td>{{yearsofexperience}}</td>
-        </tr>
-        </table>
-       </div>
-        </td>
-        </tr> 
-        </table>	
-       <div>
-       
-       
-       </div>
-     
-
-
-     <div><br>
-     
-      <button style="float: right;" ng-click="redirect2()"><span class="glyphicon glyphicon-arrow-left"></span></button>
-     
-     </div>
-     <div class="modal fade" id="myModal" role="dialog">
-       <div class="modal-dialog">
-        <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-             <button type="button" class="close" data-dismiss="modal">&times;</button>
-               <h4 class="modal-title">interview summary</h4>
-                </div>
-                  <div class="modal-body">    
-        
-       <p><b>Add interview summary</b></p> 
-       <br>
-                                           <form>												
-													<div>
-														<textarea name="textarea" style="width:500px;height:300px;"></textarea>
-													</div>
-				</form>								
-		<div style="padding-left: 90%;"> <button style="float: right: ;"  type="button"  class="btn btn-info" data-dismiss="modal">Close</button></div>
-		</div>	
-				</div>
+			         <h4 class="modal-title"> <p style="font-weight: bold;"><h4><b> {{position}}</b></h4>                 </p>
+		</div>
+			 <div style="font-weight: bold;" class="card">
+			        
+			        <br>
+			        <div  class="container">
+			      
+			        
+			        <table class=" table-hover" >
+			        <tr>
+			        <td>        
+			        <h4 style="color: blue;">Job requirments:</h4>      
+			        <table style="width: 78%;" class="table table-hover" >
+			        <tr  >
+			        <td >{{req}}</td>
+			        </tr>
+			        </table>
+			        <div class="card">
+			        <br><br>
+			        <h4 style="color: blue;">Job required skills:</h4>
+			  
+			        <table class=" table-hover" style="width: 50%;"  >
+			        <tr ng-repeat="x in skills" >
+			        <td>{{x.skills.technology}}</td>
+			        </tr>
+			        </table>
+			        
+			     
+			       </div>
+			       <br><br>
+			        <div class="card">
+			        <br><br>
+			        <h4 style="color: blue;">attache managers:</h4>
+			  
+			        <table class=" table-hover" style="width: 50%;"  >
+			        <tr ng-repeat="x in mangers" >
+			        <td>{{x.manager.firstname}}</td>
+			        </tr>
+			        </table>
+			        
+			     
+			       </div>
+			       <br><br>
+			       <div>
+			       <h4 style="color: blue;">Job required yearsofexperience:</h4>
+			       <table class=" table-hover" style="width: 50%;"  >
+			        <tr>
+			        <td>{{yearsofexperience}}</td>
+			        </tr>
+			        </table>
+			       </div>
+			        </td>
+			        </tr> 
+			        </table>	
+			       <div>
+			       
+			       
+			       </div>
+			     
+			
+			     <div><br>
+			     
+			      <button style="float: right;" ng-click="redirect2()"><span class="glyphicon glyphicon-arrow-left"></span></button>
+			     
+			     </div>
+			     <div class="modal fade" id="myModal" role="dialog">
+			       <div class="modal-dialog">
+			        <!-- Modal content-->
+			          <div class="modal-content">
+			            <div class="modal-header">
+			             <button type="button" class="close" data-dismiss="modal">&times;</button>
+			               <h4 class="modal-title">interview summary</h4>
+			                </div>
+			                  <div class="modal-body">    
+			        
+			       <p><b>Add interview summary</b></p> 
+			       <br>
+			                                           <form>												
+																<div>
+																	<textarea name="textarea" style="width:500px;height:300px;"></textarea>
+																</div>
+							</form>								
+					<div style="padding-left: 90%;"> <button style="float: right: ;"  type="button"  class="btn btn-info" data-dismiss="modal">Close</button></div>
+					</div>	
+							</div>
 													
-													</div>
-													</div>
-													</div>
-													</div>
-													</div>
-</body>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
 
